@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedant Bhattacharyya</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <h1 class="name">Vedant Bhattacharyya</h1>
+                <h2 class="title">Computer Science Student @ Rice University</h2>
+                <p class="description">I build scalable systems and conduct research in computational imaging.
+                    Passionate about machine learning, systems programming, and quantitative development.</p>
+
+                <div class="education">
+                    <h3>Education</h3>
+                    <p><strong>Rice University</strong> | May 2027</p>
+                    <p>B.S. in Computer Science, Minor in Applied Math</p>
+                </div>
+
+                <div class="skills">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Go</span>
+                        <span class="skill-tag">C</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">Systems Programming</span>
+                        <span class="skill-tag">Neural Rendering</span>
+                    </div>
+                </div>
+
+                <div class="activities">
+                    <h3>Activities</h3>
+                    <p>NCAA D1 Cross Country & Track</p>
+                    <p>O-Week New Student Advisor</p>
+                    <p>Independent videographer and editor!</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right content area -->
+        <main class="content">
+            <section id="experience">
+                <h2>Experience</h2>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Undergraduate Researcher</h3>
+                        <span class="company">Rice University Computational Imaging Lab</span>
+                        <span class="date">May 2025 - Present</span>
+                    </div>
+                    <ul class="experience-details">
+                        <li>Advanced realistic 3D object insertion and relighting by leveraging Gaussian Splatting and
+                            spherical harmonic analysis, contributing to TranSplat, a novel cross-scene rendering
+                            algorithm published in a peer-reviewed venue.</li>
+                        <li>Prototyped user-driven object placement pipeline by integrating CLIP and GPT-4 models,
+                            enabling natural language-guided 3D scene editing through cross-modal model training and
+                            literature review of state-of-the-art neural rendering techniques.</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech">Gaussian Splatting</span>
+                        <span class="tech">CLIP</span>
+                        <span class="tech">GPT-4</span>
+                        <span class="tech">Neural Rendering</span>
+                        <span class="tech">Computer Vision</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Academic Tutor</h3>
+                        <span class="company">Rice University SOAR Office</span>
+                        <span class="date">Aug 2024 - Dec 2024</span>
+                    </div>
+                    <ul class="experience-details">
+                        <li>Tutor and hold review sessions for 10-20 Rice student-athletes with STEM-related classes
+                            including introductory computer science courses, probability and statistics, and linear
+                            algebra.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Web Development Intern</h3>
+                        <span class="company">Rice University Athletics</span>
+                        <span class="date">Sept 2023 - Dec 2023</span>
+                    </div>
+                    <ul class="experience-details">
+                        <li>Enabled 300 student-athletes to track $6,000 scholarship usage by building a full-stack
+                            dashboard using React and Node.js, with secure access using OAuth2.0 and built upon cloud
+                            infrastructure using Netlify.</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech">React</span>
+                        <span class="tech">Node.js</span>
+                        <span class="tech">OAuth2.0</span>
+                        <span class="tech">Netlify</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects">
+                <h2>Projects</h2>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3>Concurrent NoSQL Database with REST API</h3>
+                        <span class="project-date">Aug 2025 - Present</span>
+                    </div>
+                    <p class="project-description">Built a concurrent NoSQL database in Go with a hierarchical model
+                        (databases, documents, collections) and a generic, thread-safe skip list index using atomics for
+                        efficient Upsert, Remove, and Query operations. Developed RESTful API endpoints and implemented
+                        thorough unit + integration testing across utilities, data structures, and API layers.</p>
+                    <div class="tech-stack">
+                        <span class="tech">Go</span>
+                        <span class="tech">Concurrent Programming</span>
+                        <span class="tech">REST API</span>
+                        <span class="tech">Systems Programming</span>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3>Preemptive User-Level Thread Library with POSIX API</h3>
+                        <span class="project-date">Feb 2025</span>
+                    </div>
+                    <p class="project-description">Implemented a complete user-level threading library in C with a
+                        preemptive round-robin scheduler, featuring POSIX-compliant pthread APIs (create, join, exit,
+                        detach) and low-latency thread state management. Designed and integrated signal-based preemption
+                        using SIGPROF, I/O multiplexing with select(), and thread synchronization mechanisms to ensure
+                        fair CPU allocation and optimal resource utilization.</p>
+                    <div class="tech-stack">
+                        <span class="tech">C</span>
+                        <span class="tech">POSIX</span>
+                        <span class="tech">Threading</span>
+                        <span class="tech">Systems Programming</span>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3>Python Automated Test Case Generator</h3>
+                        <span class="project-date">Sept 2024 - Dec 2024</span>
+                    </div>
+                    <p class="project-description">Built a Java program that ingests a config file, reference solution,
+                        and buggy implementations to automatically generate a minimal yet comprehensive set of test
+                        cases. Designed core components (parser, base set generator, tester, and concise set generator),
+                        achieving a 90% reduction in test suite size while maintaining accuracy across diverse
+                        conditions.</p>
+                    <div class="tech-stack">
+                        <span class="tech">Java</span>
+                        <span class="tech">Python</span>
+                        <span class="tech">Test Automation</span>
+                        <span class="tech">OOP</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="courses">
+                <h2>Relevant Coursework</h2>
+                <div class="coursework">
+                    <span class="course">Practical Machine Learning</span>
+                    <span class="course">Concurrent Design</span>
+                    <span class="course">Computer Architecture</span>
+                    <span class="course">Advanced Algorithms</span>
+                    <span class="course">Computer Architecture</span>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
