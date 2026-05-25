@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum PostStatus {
+  draft
+  published
+}
+
+enum SubscriberStatus {
+  pending
+  confirmed
+  unsubscribed
+}
+
+model Post {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  title       String
+  slug        String     @unique
+  status      PostStatus @default(draft)
+  publishedAt DateTime?
+
+  excerpt    String?
+  coverImage String? // URL for now; later can become a proper media table
+  content    Json      // portable block JSON (text + image blocks)
+
+  contentPlaintext    String?
+  readingTimeMinutes  Int?
+
+  // Email fanout bookkeeping (server-only)
+  lastEmailedAt          DateTime?
+  lastEmailedContentHash String?
+
+  flairs PostFlair[]
+
+  @@index([status, publishedAt(sort: Desc)])
+}
+
+model Flair {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name      String
+  slug      String  @unique
+  sortOrder Int     @default(0)
+  isActive  Boolean @default(true)
+
+  posts PostFlair[]
+}
+
+model PostFlair {
+  postId  String
+  flairId String
+
+  post  Post  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  flair Flair @relation(fields: [flairId], references: [id], onDelete: Restrict)
+
+  @@id([postId, flairId])
+  @@index([flairId])
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email  String           @unique
+  status SubscriberStatus @default(pending)
+
+  confirmedAt    DateTime?
+  unsubscribedAt DateTime?
+
+  // Operational metadata (optional)
+  source    String?
+  signupIp  String?
+  userAgent String?
+
+  // Token hashes only (never store raw tokens)
+  confirmTokenHash       String?
+  confirmTokenExpiresAt  DateTime?
+  unsubscribeTokenHash   String?
+
+  lastEmailSentAt DateTime?
+
+  @@index([status])
+}
+
