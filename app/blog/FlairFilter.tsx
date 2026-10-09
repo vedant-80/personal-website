@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import { flairClassName } from "@/components/FlairBadge";
 
 interface Flair {
   id: string;
@@ -63,11 +64,9 @@ export function FlairFilter({ flairs, activeSlugs }: Props) {
             <button
               key={flair.id}
               onClick={() => toggleFlair(flair.slug)}
-              className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold transition ${
-                isActive
-                  ? "border-[hsl(var(--color-primary))] bg-[hsl(var(--color-primary))] text-[hsl(var(--color-primary-contrast))]"
-                  : "border-[hsl(var(--color-border))] bg-[hsl(var(--color-bg))] text-[hsl(var(--color-fg))] hover:border-[hsl(var(--color-primary)/0.5)]"
-              }`}
+              type="button"
+              aria-pressed={isActive}
+              className={`${flairClassName(flair.slug, isActive)} transition hover:brightness-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2 focus-visible:ring-offset-black`}
             >
               {flair.name}
             </button>

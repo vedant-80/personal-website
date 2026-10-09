@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { flairClassName } from "@/components/FlairBadge";
 import { createPost } from "@/lib/actions/posts";
 import { useRouter } from "next/navigation";
 
@@ -99,11 +100,8 @@ export function PostForm({ flairs }: { flairs: Flair[] }) {
               key={flair.id}
               type="button"
               onClick={() => toggleFlair(flair.id)}
-              className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold transition ${
-                selectedFlairs.includes(flair.id)
-                  ? "border-[hsl(var(--color-primary))] bg-[hsl(var(--color-primary))] text-[hsl(var(--color-primary-contrast))]"
-                  : "border-[hsl(var(--color-border))] bg-[hsl(var(--color-bg))] text-[hsl(var(--color-fg))]"
-              }`}
+              aria-pressed={selectedFlairs.includes(flair.id)}
+              className={`${flairClassName(flair.slug, selectedFlairs.includes(flair.id))} transition hover:brightness-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2 focus-visible:ring-offset-black`}
             >
               {flair.name}
             </button>

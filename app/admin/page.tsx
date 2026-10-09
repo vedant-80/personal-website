@@ -1,3 +1,4 @@
+import { FlairBadge } from "@/components/FlairBadge";
 import Link from "next/link";
 import { requireAdmin } from "@/lib/admin-guard";
 import { getPosts } from "@/lib/actions/posts";
@@ -9,7 +10,7 @@ export default async function AdminPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-3xl font-semibold tracking-tight">Admin</h1>
         <Link
           href="/admin/posts/new"
@@ -30,7 +31,7 @@ export default async function AdminPage() {
                 key={post.id}
                 className="rounded-xl border border-[hsl(var(--color-border))] bg-[hsl(var(--color-surface))] p-4"
               >
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <div className="font-semibold">{post.title}</div>
                     <div className="text-sm text-[hsl(var(--color-muted))]">
@@ -47,14 +48,9 @@ export default async function AdminPage() {
                       {post.slug}
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {post.flairs.map((pf) => (
-                      <span
-                        key={pf.flairId}
-                        className="inline-flex items-center rounded-full border border-[hsl(var(--color-border))] px-2 py-0.5 text-xs"
-                      >
-                        {pf.flair.name}
-                      </span>
+                      <FlairBadge key={pf.flairId} name={pf.flair.name} slug={pf.flair.slug} />
                     ))}
                   </div>
                 </div>

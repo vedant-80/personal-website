@@ -1,3 +1,4 @@
+import { FlairBadge } from "@/components/FlairBadge";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
@@ -30,14 +31,9 @@ export default async function BlogPostPage({ params }: Props) {
       </Link>
 
       <header className="space-y-3">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {post.flairs.map((pf) => (
-            <span
-              key={pf.flairId}
-              className="inline-flex items-center rounded-full border border-[hsl(var(--color-border))] px-2 py-0.5 text-xs font-medium"
-            >
-              {pf.flair.name}
-            </span>
+            <FlairBadge key={pf.flairId} name={pf.flair.name} slug={pf.flair.slug} />
           ))}
         </div>
         <h1 className="text-3xl font-semibold tracking-tight">{post.title}</h1>
