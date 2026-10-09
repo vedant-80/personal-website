@@ -11,8 +11,11 @@ describe("email gating", () => {
   });
 
   test("sendEmail sinks in non-production", async () => {
-    process.env.NODE_ENV = "development";
-    process.env.EMAIL_SEND_MODE = "sink";
+    process.env = {
+      ...process.env,
+      NODE_ENV: "development",
+      EMAIL_SEND_MODE: "sink",
+    };
 
     const consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
     const { sendEmail } = await import("@/lib/email");
