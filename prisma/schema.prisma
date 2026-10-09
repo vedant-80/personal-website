@@ -11,6 +11,11 @@ enum PostStatus {
   published
 }
 
+enum ContentKind {
+  blog
+  project
+}
+
 enum SubscriberStatus {
   pending
   confirmed
@@ -23,6 +28,8 @@ model Post {
   updatedAt DateTime   @updatedAt
 
   title       String
+  kind        ContentKind @default(blog)
+  viewCount   Int         @default(0)
   slug        String     @unique
   status      PostStatus @default(draft)
   publishedAt DateTime?
@@ -41,6 +48,22 @@ model Post {
   flairs PostFlair[]
 
   @@index([status, publishedAt(sort: Desc)])
+  @@index([kind, status, publishedAt(sort: Desc)])
+}
+
+model SiteStats {
+  id         String @id @default("site")
+  visitCount Int    @default(0)
+}
+
+model VisitEvent {
+  id          String   @id @default(cuid())
+  visitorHash String
+  targetKey   String
+  createdAt   DateTime @default(now())
+
+  @@unique([visitorHash, targetKey])
+  @@index([createdAt])
 }
 
 model Flair {

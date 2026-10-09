@@ -1,38 +1,36 @@
-# Verification evidence
+# Current verification evidence
 
 ## Production build
 
-`npm run build` passed after the final hero sizing changes. Prisma Client generation, compilation, TypeScript, and static page generation all succeeded. `/projects` is present in the route output; authenticated and database routes remain dynamic.
+`npm run build` passed after the integrated shared content, owner toolbar, and stats origin fix. Prisma generation, compilation, TypeScript, and dynamic routes succeeded. Root layout explicitly uses dynamic rendering so signed-in owner controls are never cached as public HTML and build-time rendering does not query an unconfigured database.
 
-Next.js needs a local port for its build worker in this environment, so the production build ran with approved sandbox escalation.
+## Isolated database upgrade
+
+Started a temporary PostgreSQL 16 container on localhost port 55432, with no production database access. Applied the original migration, inserted a legacy published blog containing text and an image, then applied the new additive migration with Prisma Migrate.
+
+Verified the record retained its ID, slug, mixed-media JSON, and default blog kind, with viewCount initially zero. `prisma migrate diff --from-config-datasource --to-schema prisma/schema.prisma --exit-code` reported no difference. Fixtures were used only in the isolated database.
+
+## Real browser and server-action checks
+
+Used installed headless Chrome with actual viewport emulation against the built application and the temporary database.
+
+- 1440×900, 1280×720, 390×844, and 320×700: no horizontal overflow; all three photo figures initially visible; portrait/athlete/track order; no tilt; center frame widest/tallest.
+- Desktop photo computed object-fit is contain for every photo; source images are not cropped. Mobile retains cover framing.
+- Contour animation computes to 18 seconds; reduced-motion animation computes to none.
+- Public pages contain an Admin sign in button. Public project detail embeds the validated YouTube ID using youtube-nocookie.com and omits owner controls.
+- A valid signed JWT for a non-owner account is redirected away from admin. One valid signed owner session exposes global controls across home, projects, blog, and admin without page-specific authentication.
+- Real browser form submissions created a published project containing text and video, updated its title while preserving the video, and deleted it with confirmation. A legacy blog edit retained its original image block and slug.
+- Twenty-four concurrent repeated HTTP visits to the same project with one session cookie incremented the site and content counters once. Invalid/private/draft/missing/wrong-kind/cross-origin requests were excluded. The real test database persisted the counts.
+- Browser testing caught and fixed a real request-origin regression caused by Next.js localhost normalization; new tests cover actual Host and HTTPS proxy protocol handling.
 
 ## Automated checks
 
-`npm test -- --runInBand`: six suites, 27 tests passed.
+The full test suite and TypeScript/build checks cover owner guards, safe login returns, authorization before database access, published/kind filtering, transaction/flair replacement, unsafe media rejection, project email exclusion, mixed-media editor preservation, failure/retry handling, counter deduplication, client request serialization, global stats, smooth scrolling, cursor preferences and cleanup, and navigation/filter behavior.
 
-`tsc --noEmit --incremental false`: passed after the additional ambient-effect tests were added.
+Final test totals are recorded in PROGRESS.md. `git diff --check` passes.
 
-`git diff --check`: passed.
+## Limits and production steps
 
-## Browser checks
+Google itself was not contacted for OAuth in integration testing; signed test sessions exercised the actual application's session and authorization logic. The production Google callback registration and production database migration state remain unverified. No production database, commit, or deployment was changed. Apply the migration to the deployment's database before releasing this code; see DEPLOYMENT.md.
 
-Used installed headless Chrome against a temporary local production server, with actual DevTools viewport emulation. Verified all three source images load, there are exactly four navigation links, there is no horizontal overflow, and complete photo figures appear in the initial viewport at:
-
-| Viewport | Result |
-| --- | --- |
-| 1440×900 desktop | Passed |
-| 1280×720 short desktop | Passed |
-| 390×844 mobile | Passed |
-| 320×700 small mobile | Passed |
-
-Verified `/projects` and `/about` render with the correct active navigation item, and `/professional` redirects to `/projects`.
-
-With reduced motion enabled, the contour animation computes to `none` and the cursor glow computes to `display: none`.
-
-## Cursor behavior
-
-Installed headless Chrome reports no fine pointer, including in a fresh desktop target; the glow correctly remains disabled there. Component tests use controlled media-query and animation-frame mocks to verify the fine-pointer path, coalesced updates, touch/coarse-pointer suppression, reduced motion, preference changes, leaving/blur, and cleanup. Real mouse hardware was not available in this environment.
-
-## Limits
-
-Google OAuth settings were not changed. Sign-in requires the registered redirect URI and matching `ADMIN_EMAIL`. Database-backed blog/admin interactions were not exercised against a live database. Existing queries and server actions were preserved; filter interaction tests verify topic selection behavior.
+Headless Chrome reports no fine pointer, so desktop wheel easing and cursor tracking are verified with controlled media/rAF component tests. Native touch, zoom, editable fields, nested scrollers, keyboard interruption, and reduced motion are covered there.

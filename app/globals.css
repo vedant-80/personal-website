@@ -48,16 +48,13 @@ button { cursor: pointer; }
 .hero-links a:hover, .home-bottom a:hover { color: hsl(var(--color-link)); }
 .hero-photos { display: grid; grid-template-columns: 0.85fr 1fr 0.85fr; gap: clamp(10px, 2vw, 24px); max-width: 870px; margin: 36px auto 0; align-items: center; }
 .hero-photo { min-width: 0; margin: 0; }
-.hero-photo-athlete { transform: rotate(-5deg); }
-.hero-photo-track { transform: rotate(5deg); }
-.photo-treatment { position: relative; height: clamp(140px, 26vw, 255px); overflow: hidden; border: 1px solid hsl(var(--color-primary)); border-radius: 4px; background: #461623; box-shadow: 0 18px 60px #0008; }
-.hero-photo-portrait .photo-treatment { height: clamp(175px, 31vw, 290px); }
-.photo-treatment img { object-fit: cover; filter: grayscale(1) contrast(1.08); opacity: 0.88; mix-blend-mode: luminosity; transition: transform 600ms ease; }
+.photo-treatment { position: relative; height: clamp(140px, 26vw, 255px); overflow: hidden; border: 1px solid hsl(var(--color-primary)); border-radius: 4px; background: radial-gradient(ellipse at center, #461623, #110a0d 85%); box-shadow: 0 18px 60px #0008; }
+.hero-photo-athlete .photo-treatment { height: clamp(175px, 31vw, 290px); }
+.photo-treatment img { object-fit: contain; filter: grayscale(1) contrast(1.08); opacity: 0.88; mix-blend-mode: luminosity; }
 .hero-photo-athlete img { object-position: 50% 27%; }
 .hero-photo-portrait img { object-position: 65% 45%; }
 .hero-photo-track img { object-position: 48% 45%; }
 .photo-treatment::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(145deg, #72243a66, transparent 55%, #21091277); mix-blend-mode: multiply; }
-.hero-photo:hover img { transform: scale(1.045); }
 .hero-photo figcaption { display: flex; gap: 9px; align-items: center; margin-top: 12px; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: #aaa4a7; }
 .photo-number { color: hsl(var(--color-link)); font-family: monospace; }
 .home-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 50px; padding: 24px 0 0; border-top: 1px solid hsl(var(--color-border) / 0.5); }
@@ -74,13 +71,14 @@ button { cursor: pointer; }
   .hero-links { margin-top: 14px; }
   .hero-photos { margin-top: 24px; max-width: 720px; }
   .photo-treatment { height: 185px; }
-  .hero-photo-portrait .photo-treatment { height: 220px; }
+  .hero-photo-athlete .photo-treatment { height: 220px; }
   .home-bottom { margin-top: 32px; }
 }
 @media (max-width: 640px) {
   .site-main { padding-top: 24px; }
   .hero-intro { margin-top: 20px; }
   .hero-photos { margin-top: 32px; gap: 9px; }
+  .photo-treatment img { object-fit: cover; }
   .hero-photo figcaption { font-size: 0.48rem; gap: 4px; letter-spacing: 0.04em; }
   .home-bottom { margin-top: 32px; }
 }

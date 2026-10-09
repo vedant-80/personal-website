@@ -12,6 +12,7 @@
     "test:ci": "npm run lint && npm run test && npm run build",
     "prisma:generate": "prisma generate",
     "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
     "prisma:seed": "node prisma/seed.js"
   },

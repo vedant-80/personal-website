@@ -1,24 +1,6 @@
+import { slugify, extractPlaintext, estimateReadingTime, type ContentBlock } from "@/lib/content-model";
+
 describe("post helpers", () => {
-  function slugify(title: string): string {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "")
-      .slice(0, 80);
-  }
-
-  function extractPlaintext(content: { type: string; text?: string }[]): string {
-    return content
-      .filter((block) => block.type === "text" && block.text)
-      .map((block) => block.text)
-      .join("\n");
-  }
-
-  function estimateReadingTime(text: string): number {
-    const words = text.split(/\s+/).length;
-    return Math.max(1, Math.round(words / 238));
-  }
-
   describe("slugify", () => {
     test("lowercases and replaces spaces with hyphens", () => {
       expect(slugify("Hello World")).toBe("hello-world");
@@ -40,7 +22,7 @@ describe("post helpers", () => {
 
   describe("extractPlaintext", () => {
     test("extracts text blocks only", () => {
-      const content = [
+      const content: ContentBlock[] = [
         { type: "text", text: "Hello" },
         { type: "image", src: "img.png" },
         { type: "text", text: "World" },
@@ -49,7 +31,7 @@ describe("post helpers", () => {
     });
 
     test("returns empty string for no text blocks", () => {
-      expect(extractPlaintext([{ type: "image" }])).toBe("");
+      expect(extractPlaintext([{ type: "image", src: "/image.png" }])).toBe("");
     });
   });
 

@@ -1,10 +1,15 @@
+import { cache } from "react";
 import { auth } from "@/lib/auth";
+import { isAdminEmail, safeReturnPath } from "@/lib/admin-identity";
 import { redirect } from "next/navigation";
 
-export async function requireAdmin() {
+export const getAdminSession = cache(async () => {
   const session = await auth();
-  if (!session?.user?.email || session.user.email !== process.env.ADMIN_EMAIL) {
-    redirect("/api/auth/signin");
-  }
+  return isAdminEmail(session?.user?.email) ? session : null;
+});
+
+export async function requireAdmin(returnTo = "/admin") {
+  const session = await getAdminSession();
+  if (!session) redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(safeReturnPath(returnTo))}`);
   return session;
 }

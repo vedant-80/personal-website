@@ -1,18 +1,17 @@
 # Current goal
 
-Status: implemented and verified locally. All seven roadmap tasks are complete. Await the next user-directed change; optional project/biography content and external OAuth settings are tracked separately.
+Status: implementation complete and verified locally. Production schema deployment and Google configuration are separately documented; no production changes were made.
 
-Implement and verify Vedant Bhattacharyya's personal website design specification in the existing Next.js app.
+Extend the existing personal website with smooth scrolling, corrected photo composition, faster contours, owner access across the website, database-backed projects sharing the blog architecture, YouTube embedding, and persistent visit counters.
 
 Acceptance criteria:
 
-- Black background; gray/white text; wine red borders, accents, and icons.
-- Centered navigation with exactly four icons: home, projects (folder), about (info), and blog.
-- Wine red radial glow follows the cursor without obscuring content or intercepting clicks.
-- Initial home view shows a bold name, a short introduction, and three supplied photos with a monochrome/wine red treatment.
-- Flair colors: life green, technical blue, running red, college gold.
-- Subtle animated topographic/wave background.
-- Responsive layouts, accessible icon labels and keyboard focus, and reduced-motion support.
-- Working routes, passing tests, and a successful production build.
-
-Source photos: `assets/IMG_1745.jpeg`, `assets/IMG_1747.jpeg`, `assets/IMG_1748.jpeg`. Use these actual photos. Do not invent credentials, projects, or biographical details.
+- Smooth desktop wheel scrolling without breaking touch, keyboard, forms, nested scrolling, or reduced motion.
+- First and second photos swapped; no tilt; center remains largest. Desktop images show the complete source image, including faces.
+- Contour animation slightly faster.
+- Visible owner sign-in on every page; one persistent Google session grants owner/superuser controls throughout the website.
+- Add, edit, unpublish, and delete both blogs and projects; secure every server mutation and private query.
+- Shared content storage, editor, listing/detail rendering, video embedding, and metrics, with content-kind differences isolated.
+- Preserve existing blog rows, URLs, flairs, and mixed media when adding the new database schema.
+- Persistent site visits and per-content views, deduplicated per anonymous browsing session. No claim of identifying unique people.
+- Validate migrations on an isolated database, meaningful tests, TypeScript, production build, and browser checks. Production deployment remains a separate action.

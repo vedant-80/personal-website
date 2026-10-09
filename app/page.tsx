@@ -5,8 +5,8 @@ import track from "@/assets/IMG_1747.jpeg";
 import athlete from "@/assets/IMG_1745.jpeg";
 
 const photos = [
-  { image: athlete, alt: "Vedant smiling in his running uniform", label: "On the track", className: "hero-photo-athlete" },
   { image: portrait, alt: "Vedant smiling on a city street", label: "Along the way", className: "hero-photo-portrait" },
+  { image: athlete, alt: "Vedant smiling in his running uniform", label: "On the track", className: "hero-photo-athlete" },
   { image: track, alt: "Vedant competing in a track race", label: "In motion", className: "hero-photo-track" },
 ];
 

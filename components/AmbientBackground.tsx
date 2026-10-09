@@ -101,7 +101,7 @@ export function AmbientBackground() {
           width: 110%;
           height: 110%;
           opacity: .6;
-          animation: ambient-contour-drift 24s ease-in-out infinite alternate;
+          animation: ambient-contour-drift 18s ease-in-out infinite alternate;
         }
         .ambient-background__glow {
           position: absolute;
